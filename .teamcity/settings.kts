@@ -38,7 +38,7 @@ object Build : BuildType({
     artifactRules = "target/*jar"
 
     vcs {
-//        root(PetclinicVcs)
+        root(PetclinicVcs)
     }
 
     steps {
@@ -55,10 +55,10 @@ object Build : BuildType({
     }
 })
 
-//object PetclinicVcs : GitVcsRoot({
-//    name = "PetclinicVcs"
-//    url = "https://github.com/DenisPavlov/spring-petclinic.git"
-//})
+object PetclinicVcs : GitVcsRoot({
+    name = "PetclinicVcs"
+    url = "https://github.com/DenisPavlov/spring-petclinic.git"
+})
 
 //fun wrapWithFeature(buildType: BuildType, featureBlock: BuildFeatures.() -> Unit): BuildType {
 //    buildType.features {
