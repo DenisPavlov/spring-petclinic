@@ -33,7 +33,8 @@ project {
 }
 
 object Build : BuildType({
-    name = "Build"
+    id("My Build ID")
+    name = "My Build Name"
     artifactRules = "target/*jar"
 
     vcs {
