@@ -33,7 +33,7 @@ project {
 }
 
 object Build : BuildType({
-    id("My Build ID")
+    id("My_Build_ID")
     name = "My Build Name"
     artifactRules = "target/*jar"
 
