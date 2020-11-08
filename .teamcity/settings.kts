@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -27,26 +28,40 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.1"
 
 project {
-
+    vcsRoot(PetclinicVcs)
     buildType(Build)
 }
 
 object Build : BuildType({
     name = "Build"
+    artifactRules = "target/*jar"
 
     vcs {
-        root(DslContext.settingsRoot)
+        root(PetclinicVcs)
     }
 
     steps {
         maven {
-            goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
+            goals = "clean package"
+//            dockerImage = "maven:3.6.0-jdk-8"
         }
     }
 
     triggers {
         vcs {
+//            groupCheckinsByCommitter = true
         }
     }
 })
+
+object PetclinicVcs : GitVcsRoot({
+    name = "PetclinicVcs"
+    url = "https://github.com/DenisPavlov/spring-petclinic.git"
+})
+
+//fun wrapWithFeature(buildType: BuildType, featureBlock: BuildFeatures.() -> Unit): BuildType {
+//    buildType.features {
+//        featureBlock()
+//    }
+//    return buildType
+//}
